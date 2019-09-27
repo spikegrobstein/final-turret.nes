@@ -1,0 +1,12 @@
+*.o
+*.nes
+*.map.txt
+*.nl
+*.dbg
+*.chr
+*.labels.txt
+src/*.chr
+img/sprite_tiles.png
+img/bg_tiles.png
+src/sprite_vars.inc
+src/bg_vars.inc
