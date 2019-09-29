@@ -124,7 +124,6 @@ move_turret:
   beq @return
 
   ; check if we are moving left
-  lda turret_move
   cmp #MOVE_LEFT
   bne @move_right
 
