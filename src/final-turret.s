@@ -20,9 +20,16 @@ PPUADDR   = $2006
 PPUDATA   = $2007
 OAMDMA    = $4014
 
+; Controller
+CTRL_LATCH = $4016 ; same address as reading controller 1
+CTRL_READ1 = $4016
+CTRL_READ2 = $4017
+
 ; Nametable Addresses
 NAMETABLE1 = $2000
 NAMETABLE2 = $2400
+
+.include "constants.inc"
 
 .segment "HEADER"
 
@@ -137,6 +144,8 @@ nmi:
   sta OAMDMA ; set the high byte of ram address
 
   ; code
+  jsr move_turret
+  jsr update_debug_cell
 
 @nmi_end:
   ; jsr enable_rendering
@@ -153,4 +162,19 @@ nmi:
   inc nmi_latch
 
   rti
+
+disable_rendering:
+  lda #0
+  sta PPUCTRL
+  sta PPUMASK
+  rts
+
+enable_rendering:
+  lda #%00011110 ; enable sprites, enable background
+  sta PPUMASK
+
+  lda #%10010000 ;enable NMI, sprites from Pattern 0, background from Pattern 1
+  sta PPUCTRL
+
+  rts
 

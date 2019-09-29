@@ -3,10 +3,13 @@
 *.map.txt
 *.nl
 *.dbg
+*.nes.deb
 *.chr
 *.labels.txt
 src/*.chr
 img/sprite_tiles.png
 img/bg_tiles.png
+img/background.png
+img/sprites.png
 src/sprite_vars.inc
 src/bg_vars.inc
