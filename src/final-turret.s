@@ -137,7 +137,7 @@ nmi:
 
   inc nmi_lock
 
-  ; why am I doing this again?
+  ; configure sprite DMA
   lda #$00
   sta OAMADDR ; set low byte of ram address
   lda #$02
@@ -145,6 +145,7 @@ nmi:
 
   ; code
   jsr move_turret
+	jsr update_reticle
   jsr update_debug_cell
 
 @nmi_end:

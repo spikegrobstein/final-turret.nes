@@ -1,6 +1,7 @@
 init:
   jsr load_palette
   jsr init_bg
+	jsr init_reticle
   jsr enable_rendering
   jsr init_turret
   jsr init_scroll
@@ -34,6 +35,24 @@ init_turret:
   sta turret_position
 
   rts
+
+init_reticle:
+	lda #$00
+  sta OAMADDR  ; set the low byte (00) of the RAM address
+  lda #$02
+  sta OAMDMA  ; set the high byte (02) of the RAM address, start the transfer
+
+  ; create the reticle sprite
+  lda #15 ; 2 rows down
+  sta $0200 ; write y
+  lda #4
+  sta $0201 ; write tile index
+  lda #%00000000
+  sta $0202 ; write attributes
+  lda #64
+  sta $0203 ; write x
+
+	rts
 
 read_controller:
   lda #$01
@@ -152,6 +171,22 @@ move_turret:
 
   @return:
     rts
+
+update_reticle:
+	; read the current turret position
+	; load the x/y of where the reticle should be
+	; move the reticle sprite to there.
+
+  lda turret_position
+  tax
+  lda turret_reticle_x, x
+  sta $0203
+
+  lda turret_reticle_y, x
+  sta $0200
+
+	
+	rts
 
 update_debug_cell:
   lda PPUSTATUS

@@ -19,3 +19,4 @@ palette_data:
   palette_7:
     .byte $0A,$02,$38,$3C
 
+.include "turret_positions.inc"

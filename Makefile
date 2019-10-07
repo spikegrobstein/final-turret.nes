@@ -14,19 +14,20 @@ sourcefiles= \
 	$(srcdir)/tiles.inc \
 	$(srcdir)/rodata.inc \
 	$(srcdir)/main.inc \
-	$(srcdir)/constants.inc
+	$(srcdir)/constants.inc \
+	$(srcdir)/turret_positions.inc
 
 background_images= \
 	$(imgdir)/char.png \
 	$(imgdir)/bg_tiles.png
 
 sprite_images= \
-	$(imgdir)/sprite_tiles.png
+	$(imgdir)/sprite_tiles.png \
+	$(imgdir)/reticle.png
 
 chrfiles= \
 	$(srcdir)/sprites.chr \
 	$(srcdir)/background.chr
-
 
 
 $(project).nes: $(project).o $(project).cfg
@@ -50,6 +51,9 @@ $(srcdir)/sprites.chr: $(imgdir)/sprites.png
 $(srcdir)/background.chr: $(imgdir)/background.png
 	png2chr --size 256 --outdir $(srcdir) $^
 
+$(srcdir)/turret_positions.inc:
+	./scripts/gen_trajectories.rb > $@
+
 run: $(project).nes
 	fceuxdsp $^
 
@@ -68,3 +72,4 @@ clean:
 		$(imgdir)/sprites.png \
 		$(varfile)
 
+.PHONY:
