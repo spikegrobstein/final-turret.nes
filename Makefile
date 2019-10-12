@@ -23,7 +23,8 @@ background_images= \
 
 sprite_images= \
 	$(imgdir)/sprite_tiles.png \
-	$(imgdir)/reticle.png
+	$(imgdir)/reticle.png \
+	$(imgdir)/bullet.png
 
 chrfiles= \
 	$(srcdir)/sprites.chr \
