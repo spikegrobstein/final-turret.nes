@@ -136,15 +136,18 @@ end
 def point_to_asm_byte(point)
   x, y = point
 
+  new_x = x.abs
+  new_y = y.abs
+
   if x < 0
-    x &= 0b1000
+    new_x |= 0b1000
   end
 
   if y < 0
-    y &= 0b1000
+    new_y |= 0b1000
   end
 
-  x << 4 | y
+  (new_x << 4) | new_y
 end
 
 ANGLE = 180
@@ -192,17 +195,9 @@ t.angles.each_with_index do |angle, index|
 end
 
 puts "turret_reticle_x:"
-reticle_positions.each_with_index do |pos, index|
-  puts "  turret_reticle_x_#{index}:"
-  puts "    .byte $#{ pos.first.to_s(16) }"
-end
+puts "  .byte #{reticle_positions.map { |p| p.first.to_s(16) }.map { |p| "$#{p}" }.join(", ") }"
 puts "turret_reticle_y:"
-reticle_positions.each_with_index do |pos, index|
-  puts "  turret_reticle_y_#{index}:"
-  puts "    .byte $#{ pos.last.to_s(16) }"
-end
-
-exit
+puts "  .byte #{reticle_positions.map { |p| p.last.to_s(16) }.map { |p| "$#{p}" }.join(", ") }"
 
 puts ""
 
@@ -210,10 +205,11 @@ shot_animation_frames.each_with_index do |offsets, index|
   asm_frames =
     offsets
       .map { |point| point_to_asm_byte(point).to_s(16) }
-      .map { |point| "\##{point}"}
+      .map { |point| "$#{point.rjust(2, '0')}"}
       .join(', ')
   puts "shot_anim_frames_#{index}:"
-  puts "  .db #{asm_frames}"
+  # puts "  ; #{offsets.inspect}"
+  puts "  .byte #{asm_frames}"
 end
 
 # reduce

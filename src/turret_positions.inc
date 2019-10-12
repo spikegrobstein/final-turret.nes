@@ -1,130 +1,69 @@
 turret_reticle_x:
-  turret_reticle_x_0:
-    .byte $6d
-  turret_reticle_x_1:
-    .byte $6d
-  turret_reticle_x_2:
-    .byte $6d
-  turret_reticle_x_3:
-    .byte $6d
-  turret_reticle_x_4:
-    .byte $6e
-  turret_reticle_x_5:
-    .byte $6f
-  turret_reticle_x_6:
-    .byte $6f
-  turret_reticle_x_7:
-    .byte $70
-  turret_reticle_x_8:
-    .byte $71
-  turret_reticle_x_9:
-    .byte $73
-  turret_reticle_x_10:
-    .byte $74
-  turret_reticle_x_11:
-    .byte $75
-  turret_reticle_x_12:
-    .byte $77
-  turret_reticle_x_13:
-    .byte $78
-  turret_reticle_x_14:
-    .byte $7a
-  turret_reticle_x_15:
-    .byte $7c
-  turret_reticle_x_16:
-    .byte $7d
-  turret_reticle_x_17:
-    .byte $7f
-  turret_reticle_x_18:
-    .byte $81
-  turret_reticle_x_19:
-    .byte $82
-  turret_reticle_x_20:
-    .byte $84
-  turret_reticle_x_21:
-    .byte $85
-  turret_reticle_x_22:
-    .byte $86
-  turret_reticle_x_23:
-    .byte $88
-  turret_reticle_x_24:
-    .byte $89
-  turret_reticle_x_25:
-    .byte $8a
-  turret_reticle_x_26:
-    .byte $8a
-  turret_reticle_x_27:
-    .byte $8b
-  turret_reticle_x_28:
-    .byte $8c
-  turret_reticle_x_29:
-    .byte $8c
-  turret_reticle_x_30:
-    .byte $8c
-  turret_reticle_x_31:
-    .byte $8d
+  .byte $6d, $6d, $6d, $6d, $6e, $6f, $6f, $70, $71, $73, $74, $75, $77, $78, $7a, $7c, $7d, $7f, $81, $82, $84, $85, $86, $88, $89, $8a, $8a, $8b, $8c, $8c, $8c, $8d
 turret_reticle_y:
-  turret_reticle_y_0:
-    .byte $b4
-  turret_reticle_y_1:
-    .byte $b2
-  turret_reticle_y_2:
-    .byte $b0
-  turret_reticle_y_3:
-    .byte $af
-  turret_reticle_y_4:
-    .byte $ad
-  turret_reticle_y_5:
-    .byte $ac
-  turret_reticle_y_6:
-    .byte $aa
-  turret_reticle_y_7:
-    .byte $a9
-  turret_reticle_y_8:
-    .byte $a8
-  turret_reticle_y_9:
-    .byte $a7
-  turret_reticle_y_10:
-    .byte $a6
-  turret_reticle_y_11:
-    .byte $a5
-  turret_reticle_y_12:
-    .byte $a4
-  turret_reticle_y_13:
-    .byte $a4
-  turret_reticle_y_14:
-    .byte $a4
-  turret_reticle_y_15:
-    .byte $a4
-  turret_reticle_y_16:
-    .byte $a4
-  turret_reticle_y_17:
-    .byte $a4
-  turret_reticle_y_18:
-    .byte $a4
-  turret_reticle_y_19:
-    .byte $a4
-  turret_reticle_y_20:
-    .byte $a5
-  turret_reticle_y_21:
-    .byte $a6
-  turret_reticle_y_22:
-    .byte $a7
-  turret_reticle_y_23:
-    .byte $a8
-  turret_reticle_y_24:
-    .byte $a9
-  turret_reticle_y_25:
-    .byte $aa
-  turret_reticle_y_26:
-    .byte $ac
-  turret_reticle_y_27:
-    .byte $ad
-  turret_reticle_y_28:
-    .byte $af
-  turret_reticle_y_29:
-    .byte $b0
-  turret_reticle_y_30:
-    .byte $b2
-  turret_reticle_y_31:
-    .byte $b4
+  .byte $b4, $b2, $b0, $af, $ad, $ac, $aa, $a9, $a8, $a7, $a6, $a5, $a4, $a4, $a4, $a4, $a4, $a4, $a4, $a4, $a5, $a6, $a7, $a8, $a9, $aa, $ac, $ad, $af, $b0, $b2, $b4
+
+shot_anim_frames_0:
+  .byte $b0, $b0, $b0, $b0, $b0, $b0, $b0, $b0
+shot_anim_frames_1:
+  .byte $b0, $b9, $b0, $b0, $b9, $b0, $b0, $b9
+shot_anim_frames_2:
+  .byte $b0, $b9, $b9, $b0, $b9, $b0, $b9, $b9
+shot_anim_frames_3:
+  .byte $b9, $a9, $b9, $b9, $b9, $b9, $b9, $b0
+shot_anim_frames_4:
+  .byte $b9, $b9, $a9, $ba, $b9, $b9, $b9, $a9
+shot_anim_frames_5:
+  .byte $ba, $b9, $aa, $b9, $ba, $a9, $b9, $aa
+shot_anim_frames_6:
+  .byte $a9, $ba, $aa, $a9, $ba, $aa, $ba, $a9
+shot_anim_frames_7:
+  .byte $aa, $aa, $aa, $ba, $aa, $aa, $ba, $aa
+shot_anim_frames_8:
+  .byte $aa, $aa, $ab, $aa, $aa, $aa, $aa, $aa
+shot_anim_frames_9:
+  .byte $ab, $aa, $aa, $ab, $9a, $aa, $ab, $aa
+shot_anim_frames_10:
+  .byte $ab, $9a, $ab, $9a, $ab, $9a, $ab, $aa
+shot_anim_frames_11:
+  .byte $9b, $9a, $ab, $9b, $9a, $9b, $ab, $9a
+shot_anim_frames_12:
+  .byte $9a, $9b, $9b, $9b, $9b, $9a, $9b, $9b
+shot_anim_frames_13:
+  .byte $0b, $9b, $9b, $9b, $0b, $9a, $9b, $9b
+shot_anim_frames_14:
+  .byte $0b, $9b, $0b, $9b, $0b, $9b, $0b, $9b
+shot_anim_frames_15:
+  .byte $0b, $9b, $0b, $0b, $0b, $0b, $0b, $9b
+shot_anim_frames_16:
+  .byte $0b, $1b, $0b, $0b, $0b, $0b, $0b, $1b
+shot_anim_frames_17:
+  .byte $0b, $1b, $0b, $1b, $0b, $1b, $0b, $1b
+shot_anim_frames_18:
+  .byte $0b, $1b, $1b, $1b, $0b, $1a, $1b, $1b
+shot_anim_frames_19:
+  .byte $1a, $1b, $1b, $1b, $1b, $1a, $1b, $1b
+shot_anim_frames_20:
+  .byte $1b, $1a, $2b, $1b, $1a, $1b, $2b, $1a
+shot_anim_frames_21:
+  .byte $2b, $1a, $2b, $1a, $2b, $1a, $2b, $2a
+shot_anim_frames_22:
+  .byte $2b, $2a, $2a, $2b, $1a, $2a, $2b, $2a
+shot_anim_frames_23:
+  .byte $2a, $2a, $2b, $2a, $2a, $2a, $2a, $2a
+shot_anim_frames_24:
+  .byte $2a, $2a, $2a, $3a, $2a, $2a, $3a, $2a
+shot_anim_frames_25:
+  .byte $29, $3a, $2a, $29, $3a, $2a, $3a, $29
+shot_anim_frames_26:
+  .byte $3a, $39, $2a, $39, $3a, $29, $39, $2a
+shot_anim_frames_27:
+  .byte $39, $39, $29, $3a, $39, $39, $39, $29
+shot_anim_frames_28:
+  .byte $39, $29, $39, $39, $39, $39, $39, $30
+shot_anim_frames_29:
+  .byte $30, $39, $39, $30, $39, $30, $39, $39
+shot_anim_frames_30:
+  .byte $30, $39, $30, $30, $39, $30, $30, $39
+shot_anim_frames_31:
+  .byte $30, $30, $30, $30, $30, $30, $30, $30
