@@ -2,6 +2,7 @@ init:
   jsr load_palette
   jsr init_bg
 	jsr init_reticle
+  jsr init_bullets
   jsr enable_rendering
   jsr init_turret
   jsr init_scroll
@@ -27,6 +28,14 @@ init_scroll:
 
   rts
 
+start_sprite_dma:
+	lda #$00
+  sta OAMADDR  ; set the low byte (00) of the RAM address
+  lda #$02
+  sta OAMDMA  ; set the high byte (02) of the RAM address, start the transfer
+
+  rts
+
 init_turret:
   lda #MOVE_OFF
   sta turret_move
@@ -37,15 +46,12 @@ init_turret:
   rts
 
 init_reticle:
-	lda #$00
-  sta OAMADDR  ; set the low byte (00) of the RAM address
-  lda #$02
-  sta OAMDMA  ; set the high byte (02) of the RAM address, start the transfer
+  jsr start_sprite_dma
 
   ; create the reticle sprite
   lda #15 ; 2 rows down
   sta $0200 ; write y
-  lda #4
+  lda #RETICLE_SPRITE_INDEX
   sta $0201 ; write tile index
   lda #%00000000
   sta $0202 ; write attributes
@@ -53,6 +59,27 @@ init_reticle:
   sta $0203 ; write x
 
 	rts
+
+init_bullets:
+  jsr start_sprite_dma
+
+  lda #30 ; a couple rows down
+  sta $0204 ; y coord
+  lda #BULLET_SPRITE_INDEX
+  sta $0205 ; tile index
+  lda #%00000000
+  sta $0206 ; attributes
+  lda #64
+  sta $0207 ; x coord
+
+  ; set up default bullet settings
+  lda #08 ; angle 8
+  sta bullet_states
+  lda #%10000000 ; live bullet at start of animation
+  ldx #1
+  sta bullet_states, x
+
+  rts
 
 read_controller:
   lda #$01
@@ -184,7 +211,6 @@ update_reticle:
 
   lda turret_reticle_y, x
   sta $0200
-
 	
 	rts
 
