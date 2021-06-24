@@ -146,6 +146,7 @@ nmi:
   ; code
   jsr move_turret
 	jsr update_reticle
+  jsr update_bullets
   jsr update_debug_cell
 
 @nmi_end:

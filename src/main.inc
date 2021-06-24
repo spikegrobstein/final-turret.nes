@@ -63,7 +63,7 @@ init_reticle:
 init_bullets:
   jsr start_sprite_dma
 
-  lda #30 ; a couple rows down
+  lda #15 ; a couple rows down
   sta $0204 ; y coord
   lda #BULLET_SPRITE_INDEX
   sta $0205 ; tile index
@@ -72,12 +72,39 @@ init_bullets:
   lda #64
   sta $0207 ; x coord
 
+  lda #20; a couple rows down
+  sta $0208 ; y coord
+  lda #BULLET_SPRITE_INDEX
+  sta $0209 ; tile index
+  lda #%00000000
+  sta $020a ; attributes
+  lda #64
+  sta $020b ; x coord
+
+  lda #30 ; a couple rows down
+  sta $020c ; y coord
+  lda #BULLET_SPRITE_INDEX
+  sta $020d ; tile index
+  lda #%00000000
+  sta $020e ; attributes
+  lda #64
+  sta $020f ; x coord
+
   ; set up default bullet settings
   lda #08 ; angle 8
-  sta bullet_states
+  sta bullet_states + 1
   lda #%10000000 ; live bullet at start of animation
-  ldx #1
-  sta bullet_states, x
+  sta bullet_states
+
+  lda #00 ; angle 0
+  sta bullet_states + 3
+  lda #%10000000 ; live bullet at start of animation
+  sta bullet_states + 2
+
+  lda #18 ; angle 18
+  sta bullet_states + 5
+  lda #%10000000 ; live bullet at start of animation
+  sta bullet_states + 4
 
   rts
 
@@ -213,6 +240,85 @@ update_reticle:
   sta $0200
 	
 	rts
+
+update_bullets:
+  ; iterate over the bullet states
+  ; move each bullet if it's alive
+
+  ldx #0
+  @bullet_state_loop:
+    lda bullet_states, x
+    and %10000000
+    bne @update_bullet_state
+
+    ; handle skipping this one
+    inx ; skip the angle
+    jmp @end_of_loop
+
+  @update_bullet_state:
+    ; a contains our bullet state
+    ; read off the current animation frame number
+    and #%00001111
+    sta current_bullet_frame ; cache this
+    inc current_bullet_frame ; increment
+
+    ; check if we've overflowed
+    lda current_bullet_frame
+    cmp #%00010000
+    bcc @skip_reset_bullet_frame ; branch if we haven't overflowed
+
+      ; we overflowed, so reset and store
+      lda #%00000000
+      sta current_bullet_frame
+
+  @skip_reset_bullet_frame:
+
+    ; read angle
+    inx
+    lda bullet_states, x
+    sta current_bullet_angle ; cache
+
+    ; move cursor to the correct angle and frame, then increment by one
+    ; then we can read the deltas
+
+    ; now to figure out the delta
+    ; set y to the offset of the angle
+    ldy #0
+    @move_anim_frame_cursor_loop:
+      ; check if y is equal to our angle
+      cpy current_bullet_angle
+      beq :+
+
+      ; add 8 to y
+      tya
+      adc 8
+      tay
+
+      jmp @move_anim_frame_cursor_loop
+
+    @get_next_delta:
+      ; y is now equal to how many offsets from shot_anim_frames we have to go
+      ; we want to add n to y where n is the current frame
+      tya
+      adc current_bullet_angle
+      tay
+
+      ; now y is the offset in the angles we want
+      lda shot_anim_frames, y
+      sta current_bullet_angle ; store this value in our cache
+                               ; we don't need angles anymore, so reuse
+
+      ; now we read out the deltas and apply it to our bullet
+
+  @end_of_loop:
+    cpx #LAST_BULLET_STATE_INDEX
+    beq @end ; we are done with the loop
+
+    inx ; increment
+    jmp @bullet_state_loop ; next iteration
+
+  @end:
+    rts
 
 update_debug_cell:
   lda PPUSTATUS

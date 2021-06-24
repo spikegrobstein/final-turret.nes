@@ -14,8 +14,12 @@ turret_position: .res 1 ; 0-31
 ; for bullets in-flight, we need to store some info about them
 ; the current frame of trajectory (counter from 0-7)
 
+current_bullet_frame: .res 1 ; a place to store the frame value
+current_bullet_angle: .res 1 ; place to store the current angle
+
 bullet_states:
-  .res 2 ; first byte is angle, second byte is state
+  .res 6 ; 3 bullets on screen at once
+         ; first byte is state, second is angle
          ; state is %X___DDDD
          ; X: alive or not
          ; D: delta frame

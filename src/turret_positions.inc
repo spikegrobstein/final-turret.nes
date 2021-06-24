@@ -3,6 +3,7 @@ turret_reticle_x:
 turret_reticle_y:
   .byte $b4, $b2, $b0, $af, $ad, $ac, $aa, $a9, $a8, $a7, $a6, $a5, $a4, $a4, $a4, $a4, $a4, $a4, $a4, $a4, $a5, $a6, $a7, $a8, $a9, $aa, $ac, $ad, $af, $b0, $b2, $b4
 
+shot_anim_frames:
 shot_anim_frames_0:
   .byte $b0, $b0, $b0, $b0, $b0, $b0, $b0, $b0
 shot_anim_frames_1:
